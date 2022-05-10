@@ -11,7 +11,7 @@ function Depot() {
   }
   else{
     const decoded=jwt_decode(token);
-    if(decoded.acctype==='depot'){
+    if(decoded.acctype==='Responsable Depot'){
       return (
         <Rdepot/>
       )

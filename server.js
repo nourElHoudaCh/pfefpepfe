@@ -28,6 +28,7 @@ app.use("/cmdpayer",require("./routes/cmdfacturer.js"));
 app.use("/acquit",require("./routes/acquits.js"));
 app.use("/vente",require("./routes/bivente.js"));
 app.use("/reglement",require("./routes/bireglement.js"));
+app.use("/depot",require("./routes/bidepot.js"));
 
 
 

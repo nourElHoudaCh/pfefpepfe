@@ -18,7 +18,16 @@
 .card-category{color: grey;}
 .gridadminacceuil{
     display: grid;
-    grid-template-columns: 200px 250px 270px 250px ;
-    justify-content: space-between;
+    grid-template-columns: auto auto auto ;
     
 }
+.cardcmdencours{height: 40px;}
+.gridntwo{
+    display: grid;
+    grid-template-columns: 770px 300px   ;
+    
+}
+.livadmin{height: 40px;
+    width:300px;
+margin-left:770px;
+margin-top:-180px ;}

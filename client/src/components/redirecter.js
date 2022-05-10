@@ -11,7 +11,7 @@ function Redirecter() {
        if(decoded.acctype==="admin"){
            return <Navigate to="/admin" replace={true} />
        }
-       else if(decoded.acctype==="depot"){
+       else if(decoded.acctype==="Responsable Depot"){
            return <Navigate to="/depot" replace={true} />
        }
        else if(decoded.acctype==="client"){

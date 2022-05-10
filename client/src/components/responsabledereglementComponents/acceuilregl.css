@@ -1,5 +1,12 @@
 .reglfirst{
-    width:1000px;
+    display: grid;
+   
     margin-left: 120px;
+    grid-template-columns:600px 600px;
+
+    justify-content: space-between;
+  
+
 }
-.piereglement{ margin-left: 120px;}
+
+.regtitle{ margin-left: 120px;}

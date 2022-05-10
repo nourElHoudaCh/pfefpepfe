@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import TotalIncomeCard from './cards/Skeleton/TotalIncomeCard';
-
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import { useTheme } from '@mui/material/styles';
-
 import { Grid, MenuItem, TextField, Typography, List, ListItem, ListItemAvatar, ListItemText,  } from '@mui/material';
 import SkeletonTotalGrowthBarChart from './cards/Skeleton/TotalGrowthBarChart';
+import Maincardtwo from './cards/maincardtwo';
 import MainCard from './cards/MainCard';
 import { gridSpacing } from './store/constant';
 import React,{useEffect,useState, useRef} from 'react';
@@ -15,20 +14,11 @@ import './acceuil.css'
 import axios from 'axios'
 import { styled } from '@mui/material/styles';
 import { Avatar, Box, Button } from '@mui/material';
-import ChartistGraph from "react-chartist";
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import {Bar, BarChart,LineChart, Line,XAxis,YAxis, CartesianGrid,Tooltip,Legend,} from "recharts";
 import Plot from 'react-plotly.js'
-import {
-    PieChart,
-    Pie,
-   
-    Cell,
-    ResponsiveContainer,
-    Label
-  } from "recharts";
-const CardWrapper = styled(MainCard)(({ theme }) => ({ 
+const CardWrapper = styled( Maincardtwo)(({ theme }) => ({ 
     backgroundColor: theme.palette.primary.dark,
     color: '#fff',
     overflow: 'hidden',
@@ -154,6 +144,9 @@ const Home = ({ isLoading }) => {
     return (
         <>
      <div className='inlinechart'>
+     <br></br>
+              <h1 className='regtitle'>Tableau de bord</h1>
+              
         <div className='cardone'>
         <br></br>
            
@@ -243,7 +236,7 @@ const Home = ({ isLoading }) => {
                                     <Grid item xs={6}>
                                         {timeValue ?  <LineChart
           width={240}
-          height={150}
+          height={120}
           data={months}
           dataLabels= {{
             enabled: false
@@ -272,7 +265,7 @@ const Home = ({ isLoading }) => {
         
     : <LineChart
     width={240}
-    height={150}
+    height={120}
     data={yeargraph}
     dataLabels= {{
       enabled: false
@@ -314,7 +307,7 @@ const Home = ({ isLoading }) => {
                      marker: { colors: [theme.palette.secondary.main, '#1565c0',theme.palette.secondary.light,theme.palette.primary.light] },
                      
                  }]}
-                 layout={{width: 340,height: 230,title: 'revenue par année',
+                 layout={{width: 340,height: 230,title: 'Les 5 plus actifs clients durant cette année',
                 
                
               
@@ -334,21 +327,21 @@ const Home = ({ isLoading }) => {
            
            </div>
           
-           <br></br>     <br></br> 
+              
            <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>  
            <div className='thridbar'>
           
             {isLoading ? (
                 <SkeletonTotalGrowthBarChart />
             ) : (
-                <MainCard>
+                <MainCard >
                     <Grid container spacing={gridSpacing}>
                         <Grid item xs={12}>
                             <Grid container alignItems="center" justifyContent="space-between">
                                 <Grid item>
                                     <Grid container direction="column" spacing={1}>
                                         <Grid item>
-                                            <Typography variant="subtitle2">le mois avec le plus nombre de vente cette année :</Typography>
+                                            <Typography variant="subtitle2">Le mois avec le plus nombre de vente cette année :</Typography>
                                         </Grid>
                                         <Grid item>
                                             <Typography variant="h3">{maxm}</Typography>
@@ -378,7 +371,7 @@ const Home = ({ isLoading }) => {
                             </Grid>
                         </Grid>
                         {timeValuebar ?      <Grid item xs={12}>
-                        <BarChart width={730} height={180} data={qttarticle}>
+                        <BarChart width={730} height={160} data={qttarticle}>
   <CartesianGrid strokeDasharray="3 3" />
   <XAxis dataKey="_id" />
   <YAxis />
@@ -391,7 +384,7 @@ const Home = ({ isLoading }) => {
 </BarChart>
                         </Grid>:
                        < Grid item xs={12}>
-                        <BarChart width={730} height={180} data={articlelastm}>
+                        <BarChart width={730} height={160} data={articlelastm}>
   <CartesianGrid strokeDasharray="3 3" />
   <XAxis dataKey="_id" />
   <YAxis />
@@ -405,7 +398,7 @@ const Home = ({ isLoading }) => {
                         </Grid>
                         }
                     </Grid>
-                </MainCard>
+                </ MainCard >
             )}
            </div>
            <div >
@@ -419,7 +412,7 @@ const Home = ({ isLoading }) => {
                                         }}>
                     <Box sx={{ p: 0.25 }}>
                         <List sx={{ py: 0 }}>
-                            <ListItem alignItems="center" disableGutters sx={{ py: 4}}>
+                            <ListItem alignItems="center" disableGutters sx={{ py:2}}>
                                 <ListItemAvatar>
                                     <Avatar
                                         variant="rounded"
@@ -447,7 +440,7 @@ const Home = ({ isLoading }) => {
                                                 
                                             }}
                                         >
-                                           Nombre des commandes encours
+                                           Nombre des commandes en cours
                                         </Typography>
                                     }
                                     secondary={ cmdencours.map(el=> <><Typography variant="h4" sx={{
@@ -468,7 +461,7 @@ const Home = ({ isLoading }) => {
                                        }}>
                     <Box sx={{ p: 0.25 }}>
                         <List sx={{ py: 0 }}>
-                            <ListItem alignItems="center" disableGutters sx={{ py: 4 }}>
+                            <ListItem alignItems="center" disableGutters sx={{ py: 2}}>
                                 <ListItemAvatar>
                                     <Avatar
                                         variant="rounded"
@@ -517,7 +510,7 @@ const Home = ({ isLoading }) => {
                                        }}>
                     <Box sx={{ p: 0.25 }}>
                         <List sx={{ py: 0 }}>
-                            <ListItem alignItems="center" disableGutters sx={{ py: 4 }}>
+                            <ListItem alignItems="center" disableGutters sx={{ py: 2 }}>
                                 <ListItemAvatar>
                                     <Avatar
                                         variant="rounded"

@@ -12,18 +12,18 @@ const headerSX = {
 
 // ==============================|| CUSTOM MAIN CARD ||============================== //
 
-const MainCard = forwardRef(
+const Maincardtwo = forwardRef(
     (
         {
-            border = false,
-           
+            border = true,
+            boxShadow,
             children,
             content = true,
             contentClass = '',
             contentSX = {},
             darkTitle,
             secondary,
-            
+            shadow,
             sx = {},
             title,
             ...others
@@ -33,10 +33,17 @@ const MainCard = forwardRef(
         const theme = useTheme();
 
         return (
-            <div
+            <Card
                 ref={ref}
                 {...others}
-               style={{background:'rgba(255, 255, 255, .0)'}}
+                sx={{
+                    border: border ? '1px solid' : 'none',
+                    borderColor: theme.palette.primary[200] + 75,
+                    ':hover': {
+                        boxShadow: boxShadow ? shadow || '0 2px 14px 0 rgb(32 40 45 / 8%)' : 'inherit'
+                    },
+                    ...sx
+                }}
             >
                 {/* card header and action */}
                 {!darkTitle && title && <CardHeader sx={headerSX} title={title} action={secondary} />}
@@ -54,12 +61,12 @@ const MainCard = forwardRef(
                     </CardContent>
                 )}
                 {!content && children}
-            </div>
+            </Card>
         );
     }
 );
 
-MainCard.propTypes = {
+Maincardtwo.propTypes = {
     border: PropTypes.bool,
     boxShadow: PropTypes.bool,
     children: PropTypes.node,
@@ -73,4 +80,4 @@ MainCard.propTypes = {
     title: PropTypes.oneOfType([PropTypes.node, PropTypes.string, PropTypes.object])
 };
 
-export default MainCard;
+export default Maincardtwo;

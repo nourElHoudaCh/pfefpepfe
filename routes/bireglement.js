@@ -7,70 +7,7 @@ const cmdfacturer= require("../models/cmdfacturer")
 const Accounts = require("../models/Accounts")
         
 async function getusers(){
-  const date = new Date();
-  const yearnow= date.getFullYear()
-  const yearsnow =yearnow.toString()
-  const monthnow=   ("0" + (date.getMonth() + 1)).slice(-2).toString();
-    const prix = await cmdfacturer.aggregate([{
-    
-        $match: {year:yearsnow}},
-    {
-    $group: {
-      _id: "$month",
-      count: { $sum: "$PrixTOT" }
-    }
-  },
-  { $sort : {month: -1 } }
-])
-  console.log('revenue par mois de dernier annees',prix)
-
-  const prixannée = await cmdfacturer.aggregate([{
  
-
-$group: {
-  _id: "$year",
-  count: { $sum: "$PrixTOT" }
- 
-},
-
-},
-{ $sort : { year : 1 } }
-
-])
-console.log('revenue par année',prixannée)  
-const facturesnonréglerparmodepaiement = await facturation.aggregate([
-  { 
-    $match: {
-         $and: [ 
-             {acquit: 'oui'}, 
-             {etat:'valide'}, 
-          
-         ]
-    }}
- ,
-    
- 
-  { $group: { 
-    
-     _id: {
-      mode: "$Codeclient",
-     etat: '$Modepaiement',
-    },
-   myCount: { $sum: 1 } } },
-
-])
-console.log('factures non régler',facturesnonréglerparmodepaiement)  
-const facturemode = await cmdfacturer.aggregate([
-  {
-   $match: {year:yearsnow}},
-  
-    
-     { $group: {  _id: "$Modepaiement",
-     
-       myCount: { $sum: 1 } } },
-   
-   ])
-console.log('facturesmode',facturemode)  
 
     }
     getusers()
@@ -143,5 +80,19 @@ console.log('facturesmode',facturemode)
         
         ])
     res.send(facturemode);
+    })
+    router.get(
+      "/nonregleradmin",  async (req, res) => {
+        const facturesnonréglerparmodepaiement = await facturation.aggregate([
+          {  $match: {acquit:'oui', etat:'valide'}},
+            
+         
+          { $group: {  _id: null,
+          
+            myCount: { $sum: 1 } } },
+        
+        ])
+        
+    res.send(facturesnonréglerparmodepaiement);
     })
     module.exports=router;

@@ -1,9 +1,10 @@
 import Plot from 'react-plotly.js'
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import {Bar, BarChart,} from "recharts";
+
 import { useTheme } from '@mui/material/styles';
 import MainCard from '../responsabledeventeComponents/dashboard/Default/cards/MainCard';
 import { styled } from '@mui/material/styles';
-import { Avatar, Box, Button } from '@mui/material';
+
   import React,{useEffect,useState, useRef} from 'react';
   import { Grid, MenuItem, TextField, Typography, List, ListItem, ListItemAvatar, ListItemText,  } from '@mui/material';
 import './acceuilregl.css'
@@ -11,7 +12,8 @@ import './acceuilregl.css'
 // react plugin used to create charts
 import {
   AreaChart,
- Area,
+ Area, LineChart,
+ Line,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -85,16 +87,21 @@ function Home() {
             },[])
   
   return (
-    <div>
-      <div className='reglfirst'>
-          <MainCard>
+    <div className='tbreg'>
+      
+               <br></br>
+              <h1 className='regtitle'>Tableau de bord</h1>
+              <br></br>
+              <div className='reglfirst'>
+               
+       <MainCard >
                     <Grid container >
-                        <Grid item xs={15}>
+                        <Grid item xs={8}>
                             <Grid container alignItems="center" justifyContent="space-between">
                                 <Grid item>
                                     <Grid container direction="column" spacing={1}>
                                         <Grid item>
-                                            <Typography variant="h4">Revenue par mois en(Dinars):</Typography>
+                                            <Typography variant="subtitle2">Revenue par mois en(Dinars):</Typography>
                                         </Grid>
                                       
                                     </Grid>
@@ -102,10 +109,10 @@ function Home() {
                                 
                             </Grid>
                         </Grid>
-                        <Grid item xs={12}>
-              <AreaChart
-          width={900}
-          height={280}
+                        <Grid item xs={8}>
+              <LineChart
+          width={500}
+          height={180}
           data={revenumois}
           margin={{
             top: 10,
@@ -122,10 +129,10 @@ function Home() {
           <YAxis />
           <Tooltip />
           <Legend  />
-          <Area
-            type="monotone"
+          <Line
+           
             dataKey="count"
-            name="revenue"
+            name="revenue par mois"
             stroke={theme.palette.primary.dark} 
             fill={theme.palette.primary.dark} 
             strokeWidth="5"
@@ -134,84 +141,101 @@ function Home() {
            
           />
          
-        </AreaChart>
+        </LineChart>
         </Grid>
                     </Grid>
-                </MainCard></div>
+                </MainCard>
+          
+               <Plot
+               
+              data={[{
+                  values:nonregler.filter(el=>el._id.mode!='enligne').map((data) => data. myCount),
+                  labels:nonregler.filter(el=>el._id.mode!='enligne').map((data) => data._id.etat ),
+                  type: 'pie' ,
+                  hole: .4,
+                  marker: { colors: [theme.palette.secondary.main, '#1565c0',theme.palette.secondary.light,theme.palette.primary.light] },
+                  
+              }]}
+             
+              layout={{width: 340,height: 210,title: 'etat de factures ',
+              
+              paper_bgcolor:'rgba(255, 255, 255, .0)',  paper_bgcolor:'#ffffff',
+            
+           
+              margin:{
+                 l: 0,
+                 r: 0,
+                 b: 0,
+                 t:30,
+                 pad: 0
+             },
+             }}
+             config={{displayModeBar: false}}
+             />
+            
+            
+            <MainCard>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <Grid container alignItems="center" justifyContent="space-between">
+                                <Grid item>
+                                    <Grid container direction="column" spacing={1}>
+                                        <Grid item>
+                                            <Typography variant="subtitle2">revenue par année en(Dinars):</Typography>
+                                        </Grid>
+                                       
+                                    </Grid>
+                                </Grid>
+                               
+                            </Grid>
+                        </Grid>
+                         <Grid item xs={12}>
+                        <BarChart width={530} height={180} data={prixannee}>
+  <CartesianGrid strokeDasharray="3 3" />
+  <XAxis dataKey="_id" />
+  <YAxis />
+  <Tooltip />
+  <Legend />
+
+  <Bar dataKey="count" fill={theme.palette.secondary.main}  name ="revenue par année"/>
+ 
+
+</BarChart>
+                        </Grid>
+                    </Grid>
+                </MainCard>
+               <Plot
+              
+              data={[{
+                  values:facturemode.map((data) => data. myCount ),
+                  labels:facturemode.map((data) => data._id ),
+                  type: 'pie' ,
+                  hole: .4,
+                  marker: { colors: [theme.palette.secondary.main, '#1565c0',theme.palette.secondary.light,theme.palette.primary.light] },
+                  
+              }]}
+              layout={{width: 360,height: 210,title: 'factures par mode de paiement cette année ',
+             
+              paper_bgcolor:'rgba(255, 255, 255, .0)',
+           
+              margin:{
+                 l: 0,
+                 r: 0,
+                 b: 0,
+                 t:30,
+                 pad: 0
+             },
+             }}
+             config={{displayModeBar: false}}
+             />
+             
+        
+    
+      
+                </div>
               
                 <br></br>
-                <div className='piereglement'>
-                        
-          <Plot
-                
-                 data={[{
-                     values:prixannee.map((data) => data.count),
-                     labels:prixannee.map((data) => data._id),
-                     type: 'pie' ,
-                     marker: { colors: [theme.palette.secondary.main, '#1565c0',theme.palette.secondary.light,theme.palette.primary.light] },
-                     
-                 }]}
-                 layout={{width: 340,height: 230,title: 'revenue par année en (Dinars)',
-                
                
-              
-                 margin:{
-                    l: 0,
-                    r: 0,
-                    b: 0,
-                    t:30,
-                    pad: 0
-                },
-                }}
-                config={{displayModeBar: false}}
-                />
-                 <Plot
-                
-                data={[{
-                    values:nonregler.filter(el=>el._id.mode!='enligne').map((data) => data. myCount),
-                    labels:nonregler.filter(el=>el._id.mode!='enligne').map((data) => data._id.etat ),
-                    type: 'pie' ,
-                    marker: { colors: [theme.palette.secondary.main, '#1565c0',theme.palette.secondary.light,theme.palette.primary.light] },
-                    
-                }]}
-                layout={{width: 340,height: 230,title: 'etat de factures ',
-               
-              
-             
-                margin:{
-                   l: 0,
-                   r: 0,
-                   b: 0,
-                   t:30,
-                   pad: 0
-               },
-               }}
-               config={{displayModeBar: false}}
-               />
-                 <Plot
-                
-                data={[{
-                    values:facturemode.map((data) => data. myCount ),
-                    labels:facturemode.map((data) => data._id ),
-                    type: 'pie' ,
-                    marker: { colors: [theme.palette.secondary.main, '#1565c0',theme.palette.secondary.light,theme.palette.primary.light] },
-                    
-                }]}
-                layout={{width: 360,height: 230,title: 'factures par mode de paiement cette année ',
-               
-              
-             
-                margin:{
-                   l: 0,
-                   r: 0,
-                   b: 0,
-                   t:30,
-                   pad: 0
-               },
-               }}
-               config={{displayModeBar: false}}
-               />
-                </div>
                 <div>
                                
          

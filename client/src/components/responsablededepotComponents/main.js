@@ -2,9 +2,9 @@ import "./App.css";
 import SideMenu, { menuItems } from "./Menu/SideMenu";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState,useEffect } from "react";
-import Bonsortie from "../adminComponents/components/componentsstock/bonsortie"
-import Livraison from "../adminComponents/components/componentsstock/commandenonlivrai";
-import Ajouterstock from "../adminComponents/components/componentsstock/ajouterstock";
+import Bonsortie from "./bonsortie"
+import Livraison from "./commandenonlivrai";
+import Ajouterstock from "./ajouterstock";
 import Home from "./acceuil";
 
 function Rdepot() {

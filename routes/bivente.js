@@ -10,26 +10,22 @@ async function getusers(){
   const date = new Date();
   const yearnow= date.getFullYear()
   const monthnow=   ("0" + (date.getMonth() + 1)).slice(-2).toString();
-
-  const quantitemaxmonth = await cmdfacturer.aggregate([
-    { $match : {month: monthnow} }
-    ,
-    { "$unwind": "$Infoarticlescommander" },
+  const yearsnow =yearnow.toString()
+  const monthmax= await cmdfacturer.aggregate
+  ([
+      
+     {
+         $match: {year:yearsnow }},
    
-  {
-$group: {
-  _id:
-  "$Infoarticlescommander.des",
-   
-
-  count: { $sum: "$Infoarticlescommander.quan" },
-  counts:{$sum:1}
-}},
-   
-])
-console.log('monthnow',monthnow)
-console.log('result',quantitemaxmonth )
-   
+     {
+       $sortByCount: "$Codeclient"
+     },
+     {$limit : 5},
+        
+     
+  
+  ])
+   console.log(monthmax)
   
     }
     getusers()
@@ -183,7 +179,7 @@ console.log('result',quantitemaxmonth )
     res.send(cmdencours);
    })
 
- / router.get(
+  router.get(
     "/commandevalidesans",  async (req, res) => {
       const cmdencours = await facturation.aggregate([
       
@@ -229,20 +225,39 @@ res.send(quantitemaxmonth);
  })
  router.get(
   "/prixannee",  async (req, res) => {
-    const prixannée = await cmdfacturer.aggregate([{
+    const date = new Date();
+      const yearnow= date.getFullYear()
  
-
-      $group: {
-        _id: "$year",
-        count: { $sum: "$PrixTOT" }
-       
-      },
-      
-      },
+      const yearsnow =yearnow.toString()
+    const client= await cmdfacturer.aggregate
+    ([
+        
+       {
+           $match: {year:yearsnow }},
      
-      
-      ])
+       {
+         $sortByCount: "$Codeclient"
+       },
+       {$limit : 5},
+          
+       
     
-res.send(prixannée);
+    ])
+    
+res.send(client);
 })
+router.get(
+  "/commandevalidesansavecacquit",  async (req, res) => {
+    const cmdencours = await facturation.aggregate([
+    
+      { $match : {etat: "valide"} },
+      { $group: {  _id: 
+       "$acquit",
+       
+       count: { $sum: 1 } } },
+
+  ])
+  res.send(cmdencours);
+ })
+
    module.exports=router;
