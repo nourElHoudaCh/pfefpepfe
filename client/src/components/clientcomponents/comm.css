@@ -121,7 +121,7 @@
   }
   
   .input-group {
-    margin: 2rem 0;
+  
   }
   
   @keyframes animate {
@@ -159,6 +159,7 @@
    display: grid;
    grid-template-columns:300px 300px;
    justify-content:space-evenly;
+ 
  
    
  }

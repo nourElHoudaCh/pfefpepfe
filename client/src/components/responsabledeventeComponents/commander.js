@@ -339,7 +339,7 @@ const [affiche3,setAffiche3]=useState([])
  <div class="form-step">
  <form action="/" method="POST">
         <table class="table table-commander">
-            <thead class="thead-dark">
+        <thead className="text-primary">
                 <tr>
                     <th>Code Article</th>
                     <th>Désignation</th>
@@ -384,7 +384,7 @@ const [affiche3,setAffiche3]=useState([])
  <div class="form-step">
  <form action="/" method="POST">
         <table class="table">
-            <thead class="thead-dark">
+        <thead className="text-primary">
     <tr>
         <th>Désignation</th>
         <th>Code Article</th>

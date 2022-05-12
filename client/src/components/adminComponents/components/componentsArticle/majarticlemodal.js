@@ -74,27 +74,28 @@ function Majarticlemodal(props) {
           </p>
           <TextField
             id="nomarticle"
-            label="code de l'article"
+            label="Code de l'article"
             variant="filled"
             placeholder="entrer le nom de l'article"
             fullWidth
             margin="normal"
-            value={Designation}
+            value={CodeArticle}
+           disabled
         
             />
            <TextField
             id="codearticle"
-            label="nom de l'article"
+            label="Nom de l'article"
             variant="filled"
             placeholder="entrer le code de l'article"
             fullWidth
             margin="normal"
             onChange={(e)=>setCodeArticle(e.target.value)} 
-            value={CodeArticle}
+            value={Designation}
             />
            <TextField
             id="prixarticle"
-            label="prix de l'article"
+            label="Prix de l'article"
             variant="filled"
             placeholder="entrer le prix de l'article"
             fullWidth
@@ -102,7 +103,7 @@ function Majarticlemodal(props) {
             onChange={(e)=>setPrix(e.target.value)} 
             value={Prix}
           />
-        <Button onClick={submit}>Envoyé</Button>
+        <Button onClick={submit}>Envoyer</Button>
         <Button onClick={props.handleClose}>Fermer</Button>
         </Box>
       </Modal>

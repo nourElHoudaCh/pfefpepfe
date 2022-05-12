@@ -29,7 +29,7 @@ margin-right: 30px;
     background-color: white;
     margin-left: 20%;
   padding-top: 50px;
-margin-top: 80px;
+margin-top: 40px;
 border:1px solid #3c8fdc;
 border-bottom-left-radius: 40px;
 border-top-right-radius:40px;
@@ -60,4 +60,8 @@ body {
    background-repeat: no-repeat;
    background-attachment: fixed;
   
+}
+.inlineaerticle{display: grid;
+  grid-template-columns:200px 100px;
+  justify-content: space-between;
 }

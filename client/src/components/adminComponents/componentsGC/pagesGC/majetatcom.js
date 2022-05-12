@@ -156,14 +156,11 @@ erreur — <strong>erreur!</strong>
                 <Table responsive>
                 <thead className="text-primary">
                 <tr>
-                <th>Numéro de commande</th >
-                    
-                    <th>Identifiant-Sociéte client </th>
+                <th>Numéro de commande</th > 
+                    <th>Code client </th>
                     <th>Mode de paiement</th>
-                    <th>Prix</th>
-                  
+                    <th>Prix totale(Dt)</th>
                     <th>Valider</th>
-                    <th>Réfuser</th>
                     <th>Détails</th>
                 </tr>
             </thead>
@@ -179,8 +176,7 @@ erreur — <strong>erreur!</strong>
          
             <td> <a class="btnvalider border-shadowvalide " >
             <span ><i   onMouseMove={()=>handleDeletecommandevalider(el._id)} onClick={()=>handlevalider(el.Codeclient,el.Lieulivraison,el.Modelivraison,el.Modepaiement,el.Nbrfut,el.Vol,el.Datecomm,el.Infoarticlescommander,el.PrixHT,el.PrixTOT,el.Remise,el._id,el.email,el.nomprenom) }    class="fa fa-check"></i></span> </a></td>
-        <td> <a class="btndelete border-shadowrefuse " >
-            <span ><i   onClick={()=>handleDelete(el._id)}    class="fas fa-times" ></i></span> </a></td>
+     
             
         <td >  <a class="btndetails border-shadowdetails ">
             <span  onClick={()=>{handleOpen(el.Infoarticlescommander)}} ><i>< BsInfoLg/> </i></span> </a></td>

@@ -64,7 +64,7 @@ import Button from '@mui/material/Button';
   const [Lieulivraison,setLieulivraison]=useState('');
   const [Nbrfut,setNbrfut]=useState('');
   const [Vol,setVol]=useState('');
-  const [Datecomm,setDatecomm]=useState(null);
+  const [Datecomm,setDatecomm]=useState(new Date());
   const [Infoarticlescommander,setInfoarticlescommander]=useState([]);
   const [PrixHT,setPrixHT]=useState("");
   const [Remise,setRemise]=useState(0);
@@ -219,21 +219,21 @@ const [affiche3,setAffiche3]=useState([])
    
    <div
      class="progress-step progress-step-active"
-     data-title="informations générales"
+     data-title="Informations générales"
    ></div>
-   <div class="progress-step" data-title="informations articles"></div>
-   <div class="progress-step" data-title="articles details"></div>
-   <div class="progress-step" data-title="montant details"></div>
+   <div class="progress-step" data-title="Informations des articles"></div>
+   <div class="progress-step" data-title="Articles details"></div>
+   <div class="progress-step" data-title="Montant details"></div>
  </div>
  
  <div class="form-step form-step-active">
  <div className="gridcommander">
 
      <div class="input-group">
- <label for="modelivraison">Code et sociéte client</label>
+ <label for="modelivraison">Code client</label>
 
  <select  name="modelivraison" id="modelivraison" onChange={(e)=>setCodeclient(e.target.value)} value={Codeclient}>
-    <option selected > -- Choisir le code et la sociéte du client -- </option>
+<option></option>
     {affiche2.map((el)=>{
                   return (
                     <>
@@ -248,10 +248,9 @@ const [affiche3,setAffiche3]=useState([])
 
 </div>
 <div class="input-group">
-<label  className="labelbutt" for="Modepaiement">"cliquer pour afficher les informations du client"</label>
 
      <input  type="button"
-       value="charger"   onClick={()=>{afficheracquis(Codeclient)}}  className="butt" />
+       value="charger"   onClick={()=>{afficheracquis(Codeclient)}}  className="butt"  style={{height:'50px', marginTop:"30px"}}/>
 </div>
 {affichenew.map(el=>{  return ( <>
        
@@ -273,10 +272,10 @@ const [affiche3,setAffiche3]=useState([])
       )
     })}
    <div class="input-group">
-     <label for="Modepaiement">Mode paiement</label>
+     <label for="Modepaiement">Mode de paiement</label>
 
      <select  name="modelivraison" id="modelivraison"  onChange={(e)=>setModepaiement(e.target.value)} value={Modepaiement} >
-    <option selected > -- Choisir le mode de paiement-- </option>
+   
     {affiche3.map((el)=>{
                   return (
                     <>
@@ -294,7 +293,7 @@ const [affiche3,setAffiche3]=useState([])
      <label for="Modepaiement">Mode de livraison</label>
 
      <select  name="modelivraison" id="modelivraison"  onChange={(e)=>setModelivraison(e.target.value)} value={Modelivraison} >
-    <option selected > -- Choisir le mode de livraison -- </option>
+     <option></option>
     <option>Propres moyen</option>
     <option>A domicile</option>
 </select> 
@@ -319,10 +318,10 @@ const [affiche3,setAffiche3]=useState([])
      <label for="position">Date commande</label>
     <DatePicker 
     selected={Datecomm} 
-    dateFormat='dd/MM/yyyy'
+    dateFormat='yyyy/MM/dd kk:mm:ss'
     minDate={new Date()}
     maxDate={new Date()}
-    isClearable
+
     onChange={(e)=>setDatecomm(e)} 
     value={Datecomm} 
     />   
@@ -339,13 +338,13 @@ const [affiche3,setAffiche3]=useState([])
  <div class="form-step">
  <form action="/" method="POST">
         <table class="table table-commander">
-            <thead class="thead-dark">
+             <thead className="text-primary">
                 <tr>
-                    <th>Code Article</th>
+                <th>Code article</th>
                     <th>Désignation</th>
-                    <th>Prix(Par Litre)</th>
-                    <th>Quantite disponible</th>
-                    <th>Quantite demander</th>
+                    <th>Prix(Par litre)</th>
+                    <th>Quantité disponible</th>
+                    <th>Quantité demandée</th>
                     
                 </tr>
             </thead>
@@ -374,7 +373,7 @@ const [affiche3,setAffiche3]=useState([])
         </table>
     </form>
    <div class="btns-group">
-     <a href="#" class="btnn btn-prev">Précident</a>
+     <a href="#" class="btnn btn-prev">Précédent</a>
      <a href="#" class="btnn btn-next ml-auto"   onClick={montanttotale} >Suivant</a>
    </div>
  </div>
@@ -384,13 +383,15 @@ const [affiche3,setAffiche3]=useState([])
  <div class="form-step">
  <form action="/" method="POST">
         <table class="table">
-            <thead class="thead-dark">
+        <thead className="text-primary">
+               
     <tr>
+        
+        <th>Code article</th>
         <th>Désignation</th>
-        <th>Code Article</th>
-        <th>Quantite demander</th>
+        <th>Quantité demandée</th>
         <th>Prix (Par Litre)</th>
-        <th>Prix quantité demander</th>
+        <th>Prix quantité  demandée</th>
     </tr>
             </thead>
             <tbody>
@@ -409,7 +410,7 @@ const [affiche3,setAffiche3]=useState([])
   </table>
     </form> 
    <div class="btns-group">
-     <a href="#" class="btnn btn-prev">Previous</a>
+     <a href="#" class="btnn btn-prev">Précédent</a>
      <a href="#" class="btnn btn-next ml-auto" >Suivant</a>
    </div>
  </div>
@@ -449,13 +450,13 @@ const [affiche3,setAffiche3]=useState([])
    </div>
    </div>
    <div class="btns-group">
-     <a href="#" class="btnn btn-prev">Précident</a>
+     <a href="#" class="btnn btn-prev">Précédent</a>
      {/* <a href="#" class="btnn btn-submit" onClick={()=>submit()} >Envoyer</a> */}
      {affichenew.map(el=>{  return ( <>
        
       
     
-     <input value="Submit" class="btn ml-auto " onClick={()=>submit(el.mail,el.nom,el.prenom)} />   </>
+     <input value="Envoyer" class="btn ml-auto " onClick={()=>submit(el.mail,el.nom,el.prenom)}  style={{background:'rgb(11, 78, 179)',color:'white',width:'150px'}}/> </>
                     )
                   })}
 

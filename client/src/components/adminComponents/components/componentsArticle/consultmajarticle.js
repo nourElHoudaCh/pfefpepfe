@@ -92,7 +92,7 @@ const loadarticles=()=>{
                 <tr>
                     <th>Code Article</th>
                     <th>Désignation</th>
-                    <th>Prix</th>
+                    <th>Prix (dt)</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>

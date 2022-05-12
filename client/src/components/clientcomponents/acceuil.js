@@ -13,6 +13,7 @@ import React,{useEffect,useState} from 'react';
 import Stack from '@mui/material/Stack';
 import { orange } from '@mui/material/colors';
 import jwt_decode from 'jwt-decode'
+import rna from './logo rna.png'
 export default function Acceuil() {
  
   const [affiche,setAffiche]=useState([]) 
@@ -92,7 +93,19 @@ export default function Acceuil() {
 
     <div  className='espace'></div>
     <div class="footer">
-  <p></p>
+
+
+ 
+<h6><b>Siège: </b> Zone industrielle rades II, 1125 rades saline </h6>
+
+<h6><b>Tel: </b> +216 79 457 155 </h6>
+
+<img   className='rnalogo' src={rna}/>
+
+<h6> Tunis ,Tunisie</h6>
+
+ <h6><b>Fax:</b>216 79 457 184 </h6>
+ 
 </div>
     </div>
   );

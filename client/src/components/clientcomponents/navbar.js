@@ -15,7 +15,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import axios from 'axios' ;
 import{GrUserSettings} from 'react-icons/gr';
 import {AiOutlineLogout}from 'react-icons/ai';
-
+import user from "./profile.png";
  export const pages = [
   { 
     name: 'Acceuil',
@@ -216,7 +216,7 @@ const [activefacture,setactivefacture] = useState(false);
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="https://static.vecteezy.com/ti/vecteur-libre/p1/1993889-belle-femme-latine-avatar-icone-personnage-gratuit-vectoriel.jpg" />
+                <Avatar alt="Remy Sharp" src={user} />
               </IconButton>
             </Tooltip>
             <Menu

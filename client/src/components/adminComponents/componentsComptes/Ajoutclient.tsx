@@ -21,7 +21,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 const useStyles = makeStyles(() => ({
   input1: {
     height: 5 ,
-   
     fontSize: "15px",
     background:"white",
     
@@ -35,6 +34,7 @@ interface IFormInputs {
  nom: string;
   prenom: string;
   identifiant:number;
+  societe:string;
 }
 
 const schema = yup.object().shape({
@@ -42,88 +42,54 @@ const schema = yup.object().shape({
   password: yup.string().min(8).max(20).required('Veuillez entrer le mot de passe '),
   nom: yup.string().min(4).max(20).required('Veuillez entrer le nom ').matches(/^[A-Za-z ]*$/, 'Veuillez entrer un nom valide'),
   prenom: yup.string().min(4).max(20).required('Veuillez entrer le prénom ').matches(/^[A-Za-z ]*$/, 'Veuillez entrer un prénom valide'),
-  identifiant: yup.number().required('Veuillez entrer le code de l"identifiant').test(
+  identifiant: yup.string().min(13).max(13).required('Veuillez entrer la matricule fiscale ').test(
     "maxDigits",
     "au minimum deux nombres",
     (number) => String(number).length >7
   ), 
   
 });
-
-
 const Ajoutclient: FC = () => {
-  const {
-    register,
-    control,
-    handleSubmit,
-    watch,
-    formState: { errors ,isSubmitSuccessful},
-    reset,  resetField, setValue
-  
-  } = useForm<IFormInputs>({
-    resolver: yupResolver(schema),
-   
-   });
- 
-  const classes = useStyles();
+  const { control, handleSubmit,formState: { errors },reset, } = useForm<IFormInputs>({resolver: yupResolver(schema),});
     const [societe, setSociete]=useState('');
     const [Nom,setNom]=useState('')
     const [Prenom,setPrenom]=useState("")
     const [mail,setMail]=useState("");
-    const [Identifiant,setId]=useState("");
-    
     const [acctype, setAcctype]=useState('');
     const [error,setError]=useState(false);
     const [signed,setSigned]=useState(false);
     const maDate= new Date();
-  
     const [date,setdate]=useState(maDate.toLocaleDateString("fr"));
     var elem = date.split('/');
-
     const [month,setmonth]=useState((elem[1]));
     const [year,setyear]=useState(elem[2]);
     const [day,setday]=useState(elem[0]);
     const [monthname,setmonthname]=useState(maDate.toLocaleString('en-us', { month: 'long' }));
-    
-
     const submit :SubmitHandler<IFormInputs> =  (data)=>{
-      console.log(data)
-     
   var prenom=(data.prenom);
   var email=(data.email);
   var nom=(data.nom);
   var password=(data.password);
   var identifiant=(data.identifiant) ; 
-
         axios.post("http://localhost:5000/user/sign-up",{societe,nom,prenom,email,identifiant,acctype, password,date,month,year,day,monthname})
         .then(res => {
             if(res.status===200){
-              reset({prenom:'',nom:'', email: '',
-              password: '',
-           
-              identifiant:null}) 
-              ; setAcctype('') ; setSociete('') ;
+              reset({prenom:'',nom:'', email: '',password: '',identifiant:null}) ; setAcctype('') ; setSociete('') ;
               setSigned(true)
               const timer = setTimeout(() => {
                 setSigned(false)
-              }, 3000);
-              
-              
-            }
+              }, 3000);}
             else{
               setError(true)
               const timer = setTimeout(() => {
                 setError(false)
               }, 3000);
-                setSigned(null);
-            }
-        })
+                setSigned(null); }
+          })
         .catch(err =>  {setError(true)
         const timer = setTimeout(() => {
           setError(false)
-        }, 3000);
-          setSigned(null);})
-    }
+        }, 3000); setSigned(null);}) }
 
   return (
     <>
@@ -141,24 +107,23 @@ const Ajoutclient: FC = () => {
         <div className='ajclientcontentt'>
       
         <div className='ajclientcontentt1'>
-        <FormControl variant="standard" >
-          
-        <InputLabel  id="demo-simple-select-standard-label">Sociéte</InputLabel>
-        <Select
-        required
-            labelId="demo-simple-select-standard-label"
-            id="demo-simple-select"
-            value={societe}
-            label="societe"
-        
-
-            onChange={(event)=>setSociete(event.target.value)}
-        >
-            <MenuItem value="01">Magasin génèrale</MenuItem>
-            <MenuItem value="02">Carrefour</MenuItem>
-            <MenuItem value="03">Tunis city</MenuItem>
-        </Select>
-        </FormControl>
+        <Controller
+            name="societe"
+            control={control}
+           
+            render={({ field }) => (
+              <TextField variant="standard" id="demo-helper-text-misaligned-no-helper" 
+              onChange={(e)=>setNom(e.target.value)} value={Nom}  
+                {...field}
+                label="Société"
+              
+                error={!!errors.nom}
+                helperText={errors.nom ? errors.nom?.message : ''}
+               
+              />
+            )}
+          />
+       
         <br></br>
         <Controller
             name="nom"
@@ -185,7 +150,7 @@ const Ajoutclient: FC = () => {
               <TextField variant="standard" id="demo-helper-text-misaligned-no-helper" 
               onChange={(e)=>setPrenom(e.target.value)} value={Prenom}  
                 {...field}
-                label="Prenom"  
+                label="Prénom"  
                 
                 error={!!errors.prenom}
                 helperText={errors.prenom ? errors.prenom?.message : ''}
@@ -197,7 +162,7 @@ const Ajoutclient: FC = () => {
    <Controller
             name="email"
             control={control}
-             defaultValue='enter un email valide'
+             defaultValue='entrer un email valide'
             render={({ field }) => (
               <TextField variant="standard" id="demo-helper-text-misaligned-no-helper" 
               onChange={(e)=>setMail(e.target.value)} value={mail}  
@@ -267,7 +232,7 @@ const Ajoutclient: FC = () => {
             onChange={(event)=>setAcctype(event.target.value)}
         >
             <MenuItem value="admin">Administrateur</MenuItem>
-            <MenuItem value="Client">Client</MenuItem>
+            <MenuItem value="client">Client</MenuItem>
             <MenuItem value="Responsable Ventes">Responsable Ventes</MenuItem>
             <MenuItem value="Responsable Depot">Responsable Depot</MenuItem>
             <MenuItem value="Responsable Réglement">Responsable Réglement</MenuItem>

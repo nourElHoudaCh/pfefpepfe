@@ -3,7 +3,6 @@ const router=express.Router()
 const Accounts = require("../models/Accounts")
 const nodemailer = require("nodemailer");
 const crypto = require('crypto')
-
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken") //requiring the json web token 
 const passport=require("passport")
@@ -16,7 +15,6 @@ let mailTransporter= nodemailer.createTransport(
         }
     }
 )
-const current_user='';
 router.post("/sign-up",(req,res)=>{
 const codemail= Math.floor( Math.random() * (2564 - 4586) +2564)
     const {societe,nom,prenom,email,Usine,identifiant,acctype, password,date,month,year,day,monthname} = req.body;
@@ -28,7 +26,6 @@ const codemail= Math.floor( Math.random() * (2564 - 4586) +2564)
             mailtoken:crypto.randomBytes(64).toString('hex'),
             isverified:'false',codemail
         })   
-       
         let details={
             from:"responsableduventerna@gmail.com",
             to: email,
@@ -41,53 +38,36 @@ const codemail= Math.floor( Math.random() * (2564 - 4586) +2564)
             }
             else(console.log(envoyer))
         })
-    
         //crypt the code
-
         bcrypt.genSalt(10 , (err , salt) =>{
             bcrypt.hash(password , salt ,(err,hash)=>{
                 accounts.password=hash;
                 accounts.save()
                 .then((newacc) => res.json(newacc))
-                .catch((err) => console.error(err))
-            })
-        })
-        
-   
+                .catch((err) => console.error(err))})
+        }) 
     }
-  
 }) 
-
     .then(result => console.log(result))
-    .catch(err => console.log(err))
-    })
-
+    .catch(err => console.log(err)) })
 
 
 //login user !
 router.post("/login" , (req , res)=>{
-    const {societe,Usine,identifiant,password,Compagne,randomNumber} = req.body;
-    console.log("---------------------------------------------------------------",identifiant);
+    const {identifiant,password} = req.body;
     Accounts.findOne({identifiant}).then(user =>{
         if(!user) res.sendStatus(404)
         else {
-            
             bcrypt.compare(password,user.password)
             .then(isMatched =>{
                 if (isMatched){
-                   
-                    const payload={id:user._id ,societe:user.societe,usine:user.usine,identifiant:user.identifiant, acctype:user.acctype,nom:user.nom,prenom:user.prenom,mail:user.mail,password:user.password,codemail:user.codemail,isverified:user.isverified}
+                 const payload={id:user._id ,societe:user.societe,usine:user.usine,identifiant:user.identifiant, acctype:user.acctype,
+                    nom:user.nom,prenom:user.prenom,mail:user.mail,password:user.password,codemail:user.codemail,isverified:user.isverified}
                     jwt.sign(payload , "session" , {expiresIn:3600}, (err ,token)=>{
                         if(err) res.sendStatus(500)
-                        else {
-                       
-                            res.json({token: token});
-                           
-                        }
+                        else { res.json({token: token}); }
                     })
-                }else{
-                    res.sendStatus(400)
-                }
+                }else{ res.sendStatus(400) }
             })
         }
     }).catch(err => res.send('login error'));

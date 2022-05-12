@@ -1,3 +1,5 @@
+
+
 .containermajacquis{ display: grid;
     grid-template-columns: auto  auto auto;
     
@@ -46,14 +48,16 @@ margin-bottom: 30px;
     .acquiformdetail{
        
         line-height: 30px;
-         display: flex;margin-left: 180px;
+         display: flex;margin-left: 100px;  
+
      }
      .acquiformdetail1{
      
          display: flex;
          flex-direction: column;
-         margin-right: 200px;
+         margin-right: 130px;
          line-height: 30px;
+         width: 400px;
       
       
         

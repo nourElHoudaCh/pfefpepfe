@@ -10,75 +10,45 @@ import axios from 'axios'
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import * as yup from 'yup';
-
 import { yupResolver } from '@hookform/resolvers/yup';
 const useStyles = makeStyles(() => ({
   input1: {
     height: 5 ,
     fontSize: "15px",
-    background:"white",
-  
-   },
-  
+    background:"white" },
 }));
 interface IFormInputs {
  code: number;
   nom: string;
-prix: number;
- 
+prix: number; 
+description:string;
+photo:string;
 }
-/* .test(
-  "maxDigits",
-  "au minimum deux nombres",
-  (number) => String(number).length >1 
-).*/
 const schema = yup.object().shape({
-
- code: yup.number().required('Veuillez entrer le code de l"article').test(
-  "maxDigits",
-  "au minimum six nombres",
-  (number) => String(number).length >5
-), 
- 
+ code: yup.string().required('Veuillez entrer le code de l"article').min(6).max(6),
   nom: yup.string().min(4).max(20).required('Veuillez entrer le nom  de l"article').matches(/^[A-Za-z ]*$/, 'Veuillez entrer un nom valide'),
  prix: yup.number().required('Veuillez entrer le prix')
  
 });
  
   const Addarticle: FC = () => {
-    const {
-      register,
-      control,
-      handleSubmit,
-      watch,
-      formState: { errors ,isSubmitSuccessful},
-      reset,  resetField, setValue
-    
-    } = useForm<IFormInputs>({
+    const { control, handleSubmit, formState: { errors ,isSubmitSuccessful}, reset} = useForm<IFormInputs>({
       resolver: yupResolver(schema),
      
      });
    
   const classes = useStyles();
   const [CodeArticle, setCodeArticle]=useState('');
-  const [Designation,setDesignation]=useState('')
-  const [Prix,setPrix]=useState("")
+ 
   const [Submitted,setSubmitted]=useState(false);
   const [error,setError]=useState(false);
-  const [valide,setvalide]=useState(false);
-  const [formsubmit,setfprmsubmit]=useState(true);
+
 
  
 
- 
- 
- 
  
   const submit :SubmitHandler<IFormInputs> =  (data)=>{
-    console.log(data)
-    console.log(data.code)
-    console.log(data.nom)
-    console.log(data.prix);
+   
 var prixarticle=(data.prix);
 var codearticle=(data.code);
 var nomarticle=(data.nom);
@@ -139,10 +109,10 @@ var nomarticle=(data.nom);
               <TextField       fullWidth
               margin="normal"
               variant="filled"
-                id="codearticle"
-              label="codede l'article"
+                id="Code de l'article"
+              label="Code de l'article"
               InputProps={{ classes: { input: classes.input1 } }}
-              placeholder="entrer le code de l'article"
+              placeholder="Entrer le code de l'article"
               
               defaultValue=""
               {...field}
@@ -162,7 +132,7 @@ var nomarticle=(data.nom);
               margin="normal"
               variant="filled"
               defaultValue=""
-              label="nom de l'article"
+              label="Nom de l'article"
               InputProps={{ classes: { input: classes.input1 } }}
               placeholder="entrer le nom de l'article"
              
@@ -181,7 +151,7 @@ var nomarticle=(data.nom);
            
             render={({ field }) => (
               <TextField    id="prixarticle"
-              label="prix de l'article"
+              label="Prix de l'article"
               variant="filled"
               placeholder="entrer le prix de l'article"
               fullWidth
@@ -198,8 +168,36 @@ var nomarticle=(data.nom);
               />
             )}
           />
+          <div className='inlineaerticle'>
+           <Controller
+            name="description"
+            control={control}
+           
+            render={({ field }) => (
+              <TextField
+              id="standard-multiline-static"
+              label="Description"
+              multiline
+              rows={3}
+             
+              variant="standard"
+            />
+            )}
+          /> 
+            <Controller
+            name="photo"
+            control={control}
+            render={({ field }) => (
+              <div> 
+  <label for="img">  <img src="https://img.icons8.com/office/80/000000/add-image.png"/></label>
+  <input type="file" id="img" name="img" accept="image/*"  style={{display:"none" }}/>
+
+
+            </div>
        
-         </div>
+ )}
+          /></div>
+          </div>
           <div className='butart'>
             <div className='bt'>
               <br></br>

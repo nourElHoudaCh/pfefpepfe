@@ -59,8 +59,7 @@ function Navbar(props) {
           
           <li className={maj?"nav-item active":"nav-item"} onClick={()=>openMaj()} >
        
-              Mise à jour des acquits à caution
-          
+            Saisir acquit à caution
           </li>
            
           

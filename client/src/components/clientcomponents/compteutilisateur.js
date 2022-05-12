@@ -4,9 +4,9 @@ import React,{useEffect,useState, useRef} from 'react';
 import jwt_decode from 'jwt-decode'
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-
+import user from "./profile.png";
 import axios from 'axios'
-import user from "./assets/logo/userface.png";
+
 // reactstrap components
 import {
   Button,
@@ -178,7 +178,7 @@ else {
                        variant="outlined"
                         onClick={()=>handleOpen()}
                       >
-                        Update Profile
+                        Modifier Profil
                       </Button>
                 
                  

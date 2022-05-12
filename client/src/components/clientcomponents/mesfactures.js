@@ -13,6 +13,7 @@
   import "react-toastify/dist/ReactToastify.css";
   import CreditCardForm from './paiement/CreditCardForm';
   import Button from '@mui/material/Button';
+  import rna from './logo rna.png'
   import {
     Card,
     CardHeader,
@@ -211,12 +212,12 @@ const areUSureDelete = (choose) => {
                 <thead className="text-primary">
                 <tr>
                 
-                <th scope="col"   style={{ width: 500, }}>Numero commande</th >
-                <th scope="col"   style={{ width: 500, }}>Mode de livraison</th >
-                <th scope="col"   style={{ width: 500, }}>Mode de paiement</th >
+                <th scope="col"   style={{ width: 500, }}>Numéro commande</th >
+                <th scope="col"   style={{ width: 450, }}>Mode de livraison</th >
+                <th scope="col"   style={{ width: 450, }}>Mode de paiement</th >
                   
-                    <th scope="col"  style={{ width: 100, }}>Prix</th>
-                    <th scope="col"  style={{ width: 100, }}>Anuller</th>
+                    <th scope="col"  style={{ width: 200, }}>Prix totale (Dt)</th>
+                    <th scope="col"  style={{ width: 100, }}>Annuler</th>
                   
                     
                     
@@ -350,9 +351,21 @@ const areUSureDelete = (choose) => {
       
    
     </Box>
- 
+   <br></br>
     <div class="footer">
-<p></p>
+
+
+ 
+<h6><b>Siège: </b> Zone industrielle rades II, 1125 rades saline </h6>
+
+<h6><b>Tel: </b> +216 79 457 155 </h6>
+
+<img   className='rnalogo' src={rna}/>
+
+<h6> Tunis ,Tunisie</h6>
+
+ <h6><b>Fax:</b>216 79 457 184 </h6>
+ 
 </div>
 <div></div>
     </>

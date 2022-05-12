@@ -138,7 +138,7 @@ export default function Acqui() {
       
        <div  className="grid_majacquis">
        {affichenew.map(el=>{  return ( <>
-        <label for="position"> Codeclient/ Nom et Prénom</label>
+        <label for="position"> Code client</label>
      <input  value={el. Codeclient}disabled ></input>
      
       
@@ -174,8 +174,8 @@ export default function Acqui() {
   <th  > الحجم باللتر
   </th>
   <th >درجة الكحول</th>
-  <th> الكحول الخالصة</th>
-  <th>الكمية و الوزن الجملي للبضاعة</th>
+
+ 
 </tr>
 {affichenew.map(el=>{  return ( <>
 <td>    <TextField variant="standard"  id="demo-helper-text-misaligned-no-helper"  fullWidth  disabled/></td>
@@ -186,8 +186,7 @@ export default function Acqui() {
    value={el.Vol} fullWidth  disabled/></td>
  
   <td> <TextField variant="standard" id="demo-helper-text-misaligned-no-helper" label="" fullWidth disabled /></td>
-  <td> <TextField variant="standard" id="demo-helper-text-misaligned-no-helper" value={el.Nbrfut}  fullWidth  disabled/></td>
-  <td> <TextField variant="standard" id="demo-helper-text-misaligned-no-helper" label="" fullWidth  disabled/></td> </>
+  </>
       )
     })}
          </table>
@@ -207,10 +206,10 @@ export default function Acqui() {
     onChange={(e)=>{setdatesortie(e); setdatefin(e)}} value={datesortie}
     />   
       
-      <label for="position"> تاريخ و ساعة وصول البضاعة </label>
+      <label for="position"> تاريخ وصول البضاعة </label>
     <DatePicker 
     selected={datefin} 
-    dateFormat='yyyy/MM/dd kk:mm:ss'
+    dateFormat='yyyy/MM/dd '
     minDate={datesortie}
     
     
@@ -232,7 +231,7 @@ export default function Acqui() {
           <label for="position">الكمية</label>
      <input   type="text" disabled></input>
      <label for="position">الاسم و اللقب</label>
-     <input       onChange={(e)=>setnomprenom(e.target.value)} value= {el.Codeclient} disabled></input>
+     <input       onChange={(e)=>setnomprenom(e.target.value)} value= {el.nomprenom} disabled></input>
      
       
      <label for="position">العنوان</label>
