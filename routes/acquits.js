@@ -18,7 +18,6 @@ router.get("/allacquit",(req,res)=>{
     .then(data=>res.send(data))
     .catch(err=>console.error(err))
 })
-
 router.post("/ajouteracquit",(req,res)=>{
     const { Infoarticlescommander,Codeclient,Lieulivraison,email,Nbrfut,Vol,Modepaiement,moyentransport,datesortie,masleknakel,datefin,dateacquit,facture}=req.body;
     const paiement =Modepaiement
@@ -29,17 +28,11 @@ router.post("/ajouteracquit",(req,res)=>{
         else  {
             const art = new acquit({
                 Codeclient,lieu:Lieulivraison,Codeclient,email,Nbrfut,Vol,Modepaiement,moyentransport,datesortie,masleknakel,datefin,dateacquit,
-                Numfac:facture, Infoarticlescommander,devise:'dt'
-            })
-          
+                Numfac:facture, Infoarticlescommander,devise:'dt'  })   
         art.save()
-        .then ((data)=>{
-         
-        res.sendStatus(200);
-        })
-        .catch(err=>res.sendStatus(404))
-    }
-    })
+        .then ((data)=>{   
+        res.sendStatus(200); })
+        .catch(err=>res.sendStatus(404)) } })
     let details={
         from:"responsableduventerna@gmail.com",
         to:email,
@@ -47,26 +40,16 @@ router.post("/ajouteracquit",(req,res)=>{
         text:`Votre commande sous le numéro  ${facture} est vaider  veuillez payer votre facture ${paiement}  `
     }
     mailTransporter.sendMail(details,(err)=>{
-        if(err){
-            console.log(err)
-        }
-        else(console.log(envoyer))
-    })
-})
+        if(err){ console.log(err) }
+        else(console.log(envoyer))})})
 router.put("/updateacquit/:id",(req, res)=>{
     const {acquit}=req.body;
     const id = req.params.id;
-    if(!req.body){
-        return res.status(400)
-    }
-    else{
-        facturation.findOneAndUpdate({_id:id}, req.body)
+    if(!req.body){  return res.status(400) }
+    else{ facturation.findOneAndUpdate({_id:id}, req.body)
         .then(data => {
-             res.send(data)
-        })
-        .catch(err =>{ res.sendStatus(500) })} 
-    
-})
+             res.send(data) })
+        .catch(err =>{ res.sendStatus(500) })} })
 router.post("/ajouterbonsortie",(req,res)=>{
     const {facture,datebonsortie}=req.body;
  

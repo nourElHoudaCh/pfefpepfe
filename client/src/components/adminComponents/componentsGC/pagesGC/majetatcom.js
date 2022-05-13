@@ -27,7 +27,7 @@ import {
       //Update
       nameProduct: ""
     });
-    const handleDialog = (message, isLoading, nameProduct) => {
+   const handleDialog = (message, isLoading, nameProduct) => {
       setDialog({
         message,
         isLoading,
@@ -36,16 +36,11 @@ import {
       });
     };
   
-    const [Submitted,setSubmitted]=useState(false);
-   
+   const [Submitted,setSubmitted]=useState(false);
   const [error,setError]=useState(false);
     const handleDelete=(id)=>{
       handleDialog("voulez vous vraiment réfuser la commande numero", true, id,);
-      idProductRef.current = id;
-   
-    }
-
-;
+      idProductRef.current = id; };
 const areUSureDelete = (choose) => {
   if (choose) {
     axios.delete(`http://localhost:5000/facturation/delete/${idProductRef.current}`)
@@ -66,34 +61,28 @@ const areUSureDelete = (choose) => {
     const[numcmd,setnumcmd]=useState('');
    const handlevalider=(Codeclient,Lieulivraison,Modelivraison,Modepaiement,Nbrfut,Vol,Datecomm,Infoarticlescommander,PrixHT,PrixTOT,Remise,mongoid,email,nomprenom)=>{
    if (numcmd ==''){
-     axios.post(`http://localhost:5000/facturation/ajouterfacture`,{Codeclient,Lieulivraison,Modelivraison,Modepaiement,Nbrfut,Vol,Datecomm,Infoarticlescommander,PrixHT,PrixTOT,Remise,mongoid,email,nomprenom,date})
+     axios.post(`http://localhost:5000/facturation/ajouterfacture`,{Codeclient,Lieulivraison,Modelivraison,Modepaiement,Nbrfut,Vol,Datecomm,Infoarticlescommander,
+     PrixHT,PrixTOT,Remise,mongoid,email,nomprenom,date})
      .then(res => {
       if(res.status===200){
-      
         setSubmitted(true);
-       
 setnumcmd(mongoid);
         const timer = setTimeout(() => {
           setSubmitted(false)
-        }, 3000);
-      }
-
+        }, 3000);  }
       else{
         setError(true)
         const timer = setTimeout(() => {
           setError(false)
         }, 3000);
         setSubmitted("")
-      }
-  })
+      } })
   .catch(err =>  {setError(true)
     const timer = setTimeout(() => {
       setError(false)
     }, 3000);
     setSubmitted("")
-})
-}
-}
+})}}
 const handleDeletecommandevalider=(id)=>{
   if(id == numcmd){
   axios.delete(`http://localhost:5000/facturation/delete/${id}`)
@@ -104,8 +93,7 @@ const handleDeletecommandevalider=(id)=>{
   }})
    .catch(err=>{console.log("not great")
  })}
-} 
-;
+} ;
 
    const [affiche,setAffiche]=useState([]) 
 const loadarticles=()=>{

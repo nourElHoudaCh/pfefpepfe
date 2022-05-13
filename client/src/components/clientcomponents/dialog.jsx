@@ -42,7 +42,7 @@ function Dialog({ message, onDialog, nameProduct }) {
                 cursor: "pointer"
               }}
             >
-              Yes
+              Oui
             </button>
             <button
               onClick={() => onDialog(false)}
@@ -55,7 +55,7 @@ function Dialog({ message, onDialog, nameProduct }) {
                 cursor: "pointer"
               }}
             >
-              No
+              Non
             </button>
           </div>
         </div>

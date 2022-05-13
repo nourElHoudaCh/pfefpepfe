@@ -65,24 +65,16 @@
     const [dialog, setDialog] = useState({
       message: "",
       isLoading: false,
-      //Update
       nameProduct: ""
     });
     const handleDialog = (message, isLoading, nameProduct) => {
       setDialog({
         message,
         isLoading,
-        //Update
-        nameProduct
-      });
-    };
+        nameProduct  }); };
     const handleDelete=(id)=>{
-      handleDialog("voulez vous vraiment réfuser la commande numero", true, id,);
-      idProductRef.current = id;
-   
-    }
-
-;
+      handleDialog("Voulez vous vraiment annuler la commande numéro", true, id,);
+      idProductRef.current = id; };
 const areUSureDelete = (choose) => {
   if (choose) {
     axios.delete(`http://localhost:5000/facturation/delete/${idProductRef.current}`)
@@ -97,20 +89,7 @@ const areUSureDelete = (choose) => {
     handleDialog("", false);
   }
 };
-  const  handleToken=(Codeclient,Lieulivraison,Modelivraison,Modepaiement,Nbrfut,Vol,Datecomm,Infoarticlescommander,PrixHT,PrixTOT,mongoid,Datevalidationcomm) =>{
-     axios.post( "http://localhost:5000/cmdfacturer/paye",{Codeclient,Lieulivraison,Modelivraison,Modepaiement,Nbrfut,Vol,Datecomm,Infoarticlescommander,PrixHT,PrixTOT,mongoid,Datevalidationcomm} )
-     .then(res => {
-      if(res.status===200){
-     
-        toast("Success! Check email for details", { type: "success" });
-      } 
-      else{
-        toast("Something went wrong", { type: "error" });}
-      
-    })}
-    
-
- 
+  
     const [value, setValue] = React.useState(0);
     const [iduser, setiduser] = React.useState('');
   
@@ -211,46 +190,34 @@ const areUSureDelete = (choose) => {
                 <Table responsive>
                 <thead className="text-primary">
                 <tr>
-                
                 <th scope="col"   style={{ width: 500, }}>Numéro commande</th >
                 <th scope="col"   style={{ width: 450, }}>Mode de livraison</th >
                 <th scope="col"   style={{ width: 450, }}>Mode de paiement</th >
-                  
-                    <th scope="col"  style={{ width: 200, }}>Prix totale (Dt)</th>
-                    <th scope="col"  style={{ width: 100, }}>Annuler</th>
-                  
-                    
-                    
-                 
-                </tr>
+                <th scope="col"  style={{ width: 200, }}>Prix totale (Dt)</th>
+                <th scope="col"  style={{ width: 100, }}>Annuler</th>
+                 </tr>
                 </thead>
             <tbody>
             {affichecommandeclient.filter(el=>el.Codeclient===iduser ).map(el=>{
       return ( <><tr>
-       
          <td   scope="row">{el._id}</td>
          <td   scope="row">{el.Modelivraison}</td>
          <td   scope="row">{el.Modepaiement}</td>
-        <td  scope="row">{el.PrixTOT}</td>
-        <td> <a class="btndelete border-shadowrefuse " >
+         <td  scope="row">{el.PrixTOT}</td>
+         <td> <a class="btndelete border-shadowrefuse " >
             <span ><i   onClick={()=>handleDelete(el._id)}  class="fas fa-times" >  </i></span> </a></td>
-
-      </tr>
-  
+            </tr>
       </>
       )
     })}
        {dialog.isLoading && (
         <Dialog
-          //Update
           nameProduct={dialog.nameProduct}
           onDialog={areUSureDelete}
           message={dialog.message}
         />
-      )}
-           
-   </tbody>
-   
+      )}        
+   </tbody> 
    </Table>
               </CardBody>
               </Card>

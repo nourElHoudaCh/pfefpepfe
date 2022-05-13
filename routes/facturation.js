@@ -15,11 +15,9 @@ let mailTransporter= nodemailer.createTransport(
     }
 )
 router.post("/ajouterfacture",(req,res)=>{
-  
-    const {Codeclient,Lieulivraison,Modelivraison,Modepaiement,Nbrfut,Vol,Datecomm,Infoarticlescommander,PrixHT,PrixTOT,Remise,mongoid,email,nomprenom,date}=req.body;
+    const {Codeclient,Lieulivraison,Modelivraison,Modepaiement,Nbrfut,Vol,Datecomm,Infoarticlescommander,PrixHT,PrixTOT,Remise,
+        mongoid,email,nomprenom,date}=req.body;
     const idd=req.params.id;
-const paiement =Modepaiement;
-
     facturation.findOne({_id:mongoid})
     .then((arti)=>{
         if (arti) {
@@ -27,7 +25,8 @@ const paiement =Modepaiement;
         else  {
             const art = new  facturation({
                 Codeclient,Lieulivraison,Modelivraison,Modepaiement,Nbrfut,Vol,Datecomm,Infoarticlescommander,PrixHT,PrixTOT,email,
-                Remise,Numcomm:mongoid,etat:"valide",Datevalidationcomm:new Date(),Datevalidationcommformat:date,acquit:'non',bonsorite:'non' , nomprenom
+             Remise,Numcomm:mongoid,etat:"valide",Datevalidationcomm:new Date(),Datevalidationcommformat:date,acquit:'non',
+             bonsorite:'non' , nomprenom
             })
           
         art.save()
@@ -45,7 +44,6 @@ router.delete("/delete/:id",(req,res)=>{
     Commande.findByIdAndDelete({_id:id})
     .then(()=>{res.sendStatus(200)})
     .catch(err=>console.error(err))
-
 })
 router.delete("/deletefacture/:id",(req,res)=>{
     const id=req.params.id;
